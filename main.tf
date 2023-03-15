@@ -919,6 +919,7 @@ resource "aws_autoscaling_policy" "this" {
  dynamic "simple_configuration" {
     for_each = try([each.value.simple_configuration], [])
     content {
+      scaling_adjustment          = simple_configuration.value.scaling_adjustment
       target_value     = simple_configuration.value.target_value
       disable_scale_in = try(simple_configuration.value.disable_scale_in, null)
 
