@@ -1109,6 +1109,7 @@ resource "aws_iam_instance_profile" "this" {
   statistic           = try(each.value.statistic, "Average")
   threshold           = try(each.value.threshold, "60")
   alarm_description   = try(each.value.alarm_description, "This metric monitors EC2 CPU utilization")
+  datapoints_to_alarm = try(each.value.datapoints_to_alarm, "2")
   dimensions = {
     # AutoScalingGroupName = var.ignore_desired_capacity_changes ? aws_autoscaling_group.idc[0].name : aws_autoscaling_group.this[0].name
     AutoScalingGroupName = try(each.value.AutoScalingGroupName, aws_autoscaling_group.this[0].name)
