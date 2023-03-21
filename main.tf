@@ -1100,7 +1100,7 @@ resource "aws_iam_instance_profile" "this" {
   # for_each = { for k, v in var.metric_alarms : k => v }
   #for_each = { for k, v in var.metric_alarms : k => v if var.create_metric_alarm }
   
-  alarm_name          = try(each.value.name, each.key)
+  alarm_name          = try(each.value.alarm_name, "CPUUtilization")
   comparison_operator = try(each.value.comparison_operator, "GreaterThanThreshold")
   evaluation_periods  = try(each.value.evaluation_periods, "2")
   metric_name         = try(each.value.metric_name, "CPUUtilization")
