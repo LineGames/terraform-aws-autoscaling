@@ -1096,8 +1096,8 @@ resource "aws_iam_instance_profile" "this" {
   
   resource "aws_cloudwatch_metric_alarm" "this" {
   # for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_scaling_policy }
-  #for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_scaling_policy && var.create_metric_alarm }
-   for_each = { for k, v in var.metric_alarms : k => v }
+  for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_scaling_policy && var.create_metric_alarm }
+   #for_each = { for k, v in var.metric_alarms : k => v }
   #for_each = { for k, v in var.metric_alarms : k => v if var.create_metric_alarm }
   
   alarm_name          = try(each.value.alarm_name, "CPUUtilization")
@@ -1115,6 +1115,7 @@ resource "aws_iam_instance_profile" "this" {
 
   }
 
-  #alarm_actions = [aws_autoscaling_policy.this["scaleout"].arn]
-    alarm_actions = try(each.value.alarm_actions, aws_autoscaling_policy.this["scaleout"].arn)
+  alarm_actions = [aws_autoscaling_policy.this["scaleout"].arn]
+  alarm_sns = try(each.value.alarm_sns)
+   # alarm_actions = try(each.value.alarm_actions, aws_autoscaling_policy.this["scaleout"].arn)
 }
