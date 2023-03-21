@@ -487,6 +487,18 @@ variable "scaling_policies" {
   default     = {}
 }
 
+variable "create_metric_alarm" {
+  description = "Determines whether to create target metric alarm schedule or not"
+  type        = bool
+  default     = false
+}
+
+variable "metric_alarms" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
 ################################################################################
 # IAM Role / Instance Profile
 ################################################################################
