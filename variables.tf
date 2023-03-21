@@ -499,6 +499,12 @@ variable "metric_alarms" {
   default     = {}
 }
 
+variable "alarm_actions" {
+  description = "The AMI from which to launch the instance"
+  type        = string
+  default     = ""
+}
+
 ################################################################################
 # IAM Role / Instance Profile
 ################################################################################
