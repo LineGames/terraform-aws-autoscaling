@@ -1116,6 +1116,6 @@ resource "aws_iam_instance_profile" "this" {
 
   }
 
-  alarm_actions = [try(each.value.alarm_actions), aws_autoscaling_policy.this["scaleout"].arn]
+  alarm_actions = [var.alarm_actions, aws_autoscaling_policy.this["scaleout"].arn]
     #alarm_actions = try(each.value.alarm_actions, aws_autoscaling_policy.this["scaleout"].arn)
 }
