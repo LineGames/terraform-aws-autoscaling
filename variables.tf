@@ -490,7 +490,7 @@ variable "scaling_policies" {
 variable "create_metric_alarm" {
   description = "Determines whether to create target metric alarm schedule or not"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "metric_alarms" {
