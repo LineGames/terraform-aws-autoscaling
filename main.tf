@@ -1098,7 +1098,7 @@ resource "aws_iam_instance_profile" "this" {
   # for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_scaling_policy }
   # for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_scaling_policy && var.create_metric_alarm }
   # for_each = { for k, v in var.metric_alarms : k => v }
-  for_each = { for k, v in var.metric_alarms : k => v if local.create && var.create_metric_alarm }
+  for_each = { for k, v in var.metric_alarms : k => v if local.create}
   
   alarm_name          = try(each.value.name, each.key)
   comparison_operator = try(each.value.comparison_operator, "GreaterThanThreshold")
